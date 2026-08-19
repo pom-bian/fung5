@@ -27,8 +27,10 @@ footer { display: flex; justify-content: space-between; padding: 22px 0 28px; bo
 .review-verdict { margin: 15px 0 0; color: #bd6548; font-size: .82rem; line-height: 1.5; }
 .review-verdict.is-correct { color: #3e7655; }
 @media (max-width: 650px) { .font-compare { grid-template-columns: 1fr; gap: 10px; } }
-.choice { min-height: 112px; }
-.choice-copy i { color: #6e776d; font: .72rem/1.4 'Manrope', sans-serif; font-style: normal; }
+.choice { min-height: 180px; }
+.choice-copy { width: 100%; }
+.choice-preview { display: block; font-size: clamp(1.8rem, 3vw, 2.8rem) !important; line-height: .95; letter-spacing: -.06em; }
+.choice-copy small { margin-top: 15px; }
 .choice.correct { border-color: #6f9d79; background: #e7f0e5; }
 .choice.correct .choice-result { color: #3e7655; }
 .choice.wrong { border-color: #d99d89; background: #f8e9e2; }
