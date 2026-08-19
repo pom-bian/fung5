@@ -11,16 +11,16 @@ const fonts: Font[] = [
   { name: 'Space Grotesk', family: 'Space Grotesk', mood: '現代、好奇', category: '無襯線字體', clue: '幾何骨架中帶有不規則細節，理性但不無聊。', use: '科技、新創、數位產品' }, { name: 'Unbounded', family: 'Unbounded', mood: '未來感、醒目', category: '展示字體', clue: '字寬誇張、形狀幾何，遠看就有強烈未來感。', use: '科技活動、音樂、遊戲標題' },
 ]
 const rounds = [
-  { question: '哪個比較適合科技新創的產品標題？', translation: 'Best for a tech startup product title?', target: 'Space Grotesk', options: ['Space Grotesk', 'Manrope'] },
-  { question: '哪個比較適合街頭活動的主視覺海報？', translation: 'Best for a street event poster?', target: 'Bungee', options: ['Bungee', 'Manrope'] },
-  { question: '哪個比較適合高級時尚雜誌的封面標題？', translation: 'Best for a luxury fashion cover?', target: 'Playfair Display', options: ['Playfair Display', 'Cormorant Garamond'] },
-  { question: '哪個比較適合放在程式碼編輯器裡？', translation: 'Best for a code editor?', target: 'DM Mono', options: ['DM Mono', 'Space Grotesk'] },
-  { question: '哪個比較適合手作甜點店的招牌？', translation: 'Best for a handmade dessert shop sign?', target: 'Pacifico', options: ['Pacifico', 'Fraunces'] },
-  { question: '哪個比較適合文學小說的書封？', translation: 'Best for a literary novel cover?', target: 'Cormorant Garamond', options: ['Cormorant Garamond', 'IBM Plex Serif'] },
-  { question: '哪個比較適合未來感音樂祭的主視覺？', translation: 'Best for a futuristic music festival?', target: 'Unbounded', options: ['Unbounded', 'Bungee'] },
-  { question: '哪個比較適合長篇文章閱讀？', translation: 'Best for reading a long-form article?', target: 'IBM Plex Serif', options: ['IBM Plex Serif', 'Manrope'] },
-  { question: '哪個比較適合友善的生活 App 介面？', translation: 'Best for a friendly lifestyle app?', target: 'Manrope', options: ['Manrope', 'Space Grotesk'] },
-  { question: '哪個比較適合有復古個性的食品品牌？', translation: 'Best for a food brand with retro charm?', target: 'Fraunces', options: ['Fraunces', 'Playfair Display'] },
+  { question: '哪個比較適合有個性、帶點實驗感的科技新創產品標題？', translation: 'Best for a bold, curious tech product?', target: 'Space Grotesk', options: ['Space Grotesk', 'Manrope'] },
+  { question: '哪個比較適合要從遠處就吸引目光的街頭活動海報？', translation: 'Best for a poster that demands attention?', target: 'Bungee', options: ['Bungee', 'Manrope'] },
+  { question: '哪個比較適合高對比、講究時裝感的雜誌封面？', translation: 'Best for a sharp, fashion-forward cover?', target: 'Playfair Display', options: ['Playfair Display', 'Cormorant Garamond'] },
+  { question: '哪個比較適合需要清楚對齊程式碼的編輯器？', translation: 'Best for lining up code clearly?', target: 'DM Mono', options: ['DM Mono', 'Space Grotesk'] },
+  { question: '哪個比較適合帶有手寫簽名感、輕鬆親切的甜點店招牌？', translation: 'Best for a friendly, handwritten dessert sign?', target: 'Pacifico', options: ['Pacifico', 'Fraunces'] },
+  { question: '哪個比較適合帶有詩意與古典氣質的文學小說書封？', translation: 'Best for a poetic, classical novel cover?', target: 'Cormorant Garamond', options: ['Cormorant Garamond', 'IBM Plex Serif'] },
+  { question: '哪個比較適合寬闊、強烈、帶有數位未來感的音樂祭主標題？', translation: 'Best for a wide, futuristic festival title?', target: 'Unbounded', options: ['Unbounded', 'Bungee'] },
+  { question: '哪個比較適合數位產品裡清爽、舒服的長篇文章閱讀？', translation: 'Best for calm, comfortable digital reading?', target: 'Manrope', options: ['IBM Plex Serif', 'Manrope'] },
+  { question: '哪個比較適合讓第一次使用者感到輕鬆的生活 App 介面？', translation: 'Best for an easygoing lifestyle app?', target: 'Manrope', options: ['Manrope', 'Space Grotesk'] },
+  { question: '哪個比較適合溫暖、帶有手工印刷感的復古食品品牌？', translation: 'Best for a warm, handmade food brand?', target: 'Fraunces', options: ['Fraunces', 'Playfair Display'] },
 ]
 const round = ref(1), score = ref(0), streak = ref(0), selected = ref<string | null>(null), gameOver = ref(false), answerHistory = ref<Answer[]>([])
 const current = computed(() => fonts.find((font) => font.name === rounds[round.value - 1].target)!)
