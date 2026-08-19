@@ -11,21 +11,21 @@ const fonts: Font[] = [
   { name: 'Space Grotesk', family: 'Space Grotesk', mood: '現代、好奇', category: '無襯線字體', clue: '幾何骨架中帶有不規則細節，理性但不無聊。', use: '科技、新創、數位產品' }, { name: 'Unbounded', family: 'Unbounded', mood: '未來感、醒目', category: '展示字體', clue: '字寬誇張、形狀幾何，遠看就有強烈未來感。', use: '科技活動、音樂、遊戲標題' },
 ]
 const rounds = [
-  { question: '哪個比較適合科技新創的產品標題？', sample: 'make room for good ideas', target: 'Space Grotesk', options: ['Space Grotesk', 'Manrope'] },
-  { question: '哪個比較適合街頭活動的主視覺海報？', sample: 'small details, big feeling', target: 'Bungee', options: ['Bungee', 'Manrope'] },
-  { question: '哪個比較適合高級時尚雜誌的封面標題？', sample: 'there is no wrong type', target: 'Playfair Display', options: ['Playfair Display', 'Cormorant Garamond'] },
-  { question: '哪個比較適合放在程式碼編輯器裡？', sample: 'build something useful', target: 'DM Mono', options: ['DM Mono', 'Space Grotesk'] },
-  { question: '哪個比較適合手作甜點店的招牌？', sample: 'good things take time', target: 'Pacifico', options: ['Pacifico', 'Fraunces'] },
-  { question: '哪個比較適合文學小說的書封？', sample: 'made for curious people', target: 'Cormorant Garamond', options: ['Cormorant Garamond', 'IBM Plex Serif'] },
-  { question: '哪個比較適合未來感音樂祭的主視覺？', sample: 'the future feels friendly', target: 'Unbounded', options: ['Unbounded', 'Bungee'] },
-  { question: '哪個比較適合長篇文章閱讀？', sample: 'ideas worth sharing', target: 'IBM Plex Serif', options: ['IBM Plex Serif', 'Manrope'] },
-  { question: '哪個比較適合友善的生活 App 介面？', sample: 'keep it beautifully simple', target: 'Manrope', options: ['Manrope', 'Space Grotesk'] },
-  { question: '哪個比較適合有復古個性的食品品牌？', sample: 'a little more feeling', target: 'Fraunces', options: ['Fraunces', 'Playfair Display'] },
+  { question: '哪個比較適合科技新創的產品標題？', translation: 'Best for a tech startup product title?', target: 'Space Grotesk', options: ['Space Grotesk', 'Manrope'] },
+  { question: '哪個比較適合街頭活動的主視覺海報？', translation: 'Best for a street event poster?', target: 'Bungee', options: ['Bungee', 'Manrope'] },
+  { question: '哪個比較適合高級時尚雜誌的封面標題？', translation: 'Best for a luxury fashion cover?', target: 'Playfair Display', options: ['Playfair Display', 'Cormorant Garamond'] },
+  { question: '哪個比較適合放在程式碼編輯器裡？', translation: 'Best for a code editor?', target: 'DM Mono', options: ['DM Mono', 'Space Grotesk'] },
+  { question: '哪個比較適合手作甜點店的招牌？', translation: 'Best for a handmade dessert shop sign?', target: 'Pacifico', options: ['Pacifico', 'Fraunces'] },
+  { question: '哪個比較適合文學小說的書封？', translation: 'Best for a literary novel cover?', target: 'Cormorant Garamond', options: ['Cormorant Garamond', 'IBM Plex Serif'] },
+  { question: '哪個比較適合未來感音樂祭的主視覺？', translation: 'Best for a futuristic music festival?', target: 'Unbounded', options: ['Unbounded', 'Bungee'] },
+  { question: '哪個比較適合長篇文章閱讀？', translation: 'Best for reading a long-form article?', target: 'IBM Plex Serif', options: ['IBM Plex Serif', 'Manrope'] },
+  { question: '哪個比較適合友善的生活 App 介面？', translation: 'Best for a friendly lifestyle app?', target: 'Manrope', options: ['Manrope', 'Space Grotesk'] },
+  { question: '哪個比較適合有復古個性的食品品牌？', translation: 'Best for a food brand with retro charm?', target: 'Fraunces', options: ['Fraunces', 'Playfair Display'] },
 ]
 const round = ref(1), score = ref(0), streak = ref(0), selected = ref<string | null>(null), gameOver = ref(false), answerHistory = ref<Answer[]>([])
 const current = computed(() => fonts.find((font) => font.name === rounds[round.value - 1].target)!)
 const question = computed(() => rounds[round.value - 1].question)
-const sample = computed(() => rounds[round.value - 1].sample)
+const translation = computed(() => rounds[round.value - 1].translation)
 const choices = computed(() => rounds[round.value - 1].options.map((name) => fonts.find((font) => font.name === name)!))
 const progress = computed(() => `${Math.min(round.value, 10).toString().padStart(2, '0')} / 10`)
 function currentFont(name: string) { return fonts.find((font) => font.name === name)! }
@@ -40,9 +40,8 @@ function restart() { round.value = 1; score.value = 0; streak.value = 0; selecte
     <section v-if="!gameOver" class="game-shell">
       <header class="game-heading"><div><p class="eyebrow">第 {{ progress }} 回合</p><h1>{{ question }}</h1></div><div class="streak"><span>✦</span> 完成後揭曉</div></header>
       <div class="progress-track" aria-hidden="true"><span :style="{ width: `${round * 10}%` }"></span></div>
-      <article class="sample-card"><div class="card-label"><span>你認得出這個字體嗎？</span><span class="card-number">0{{ round }}</span></div><p class="font-sample" :style="{ fontFamily: `'${current.family}', sans-serif` }">{{ sample }}</p><div class="sample-footer"><span>每種字體都有自己的個性。</span><span>仔細選擇 <b>↓</b></span></div></article>
       <div class="choices-heading"><span>選出你的答案</span><span>答對得 100 分</span></div>
-      <div class="choices" role="group" aria-label="字體選項"><button v-for="font in choices" :key="font.name" class="choice" :class="{ chosen: selected === font.name, correct: selected === font.name && font.name === current.name, wrong: selected === font.name && font.name !== current.name }" @click="choose(font)"><span class="choice-letter">{{ String.fromCharCode(65 + choices.indexOf(font)) }}</span><span class="choice-copy"><strong class="choice-preview" :style="{ fontFamily: `'${font.family}', sans-serif` }">{{ sample }}</strong><small>{{ font.name }}</small></span><span v-if="selected === font.name" class="choice-result">{{ font.name === current.name ? '✓' : '×' }}</span></button></div>
+      <div class="choices" role="group" aria-label="字體選項"><button v-for="font in choices" :key="font.name" class="choice" :class="{ chosen: selected === font.name, correct: selected === font.name && font.name === current.name, wrong: selected === font.name && font.name !== current.name }" @click="choose(font)"><span class="choice-letter">{{ String.fromCharCode(65 + choices.indexOf(font)) }}</span><span class="choice-copy"><strong class="choice-preview" :style="{ fontFamily: `'${font.family}', sans-serif` }">{{ translation }}</strong><small>{{ font.name }}</small></span><span v-if="selected === font.name" class="choice-result">{{ font.name === current.name ? '✓' : '×' }}</span></button></div>
       <div v-if="selected" class="answer-row answer-pending" aria-live="polite"><strong v-if="selected === current.name" class="answer-good">答對了！</strong><strong v-else class="answer-bad">答錯了。</strong><button class="next-button" @click="nextRound">{{ round === 10 ? '查看完整解析' : '下一回合' }} <span>→</span></button></div>
     </section>
     <section v-else class="finish-shell"><p class="eyebrow">遊戲完成 · 共 10 回合</p><h1>你的字體<br /><em>風格報告。</em></h1><div class="final-score"><span>最後得分</span><strong>{{ score.toString().padStart(4, '0') }}</strong><small>10 題答對 {{ score / 100 }} 題</small></div><div class="review-list"><article v-for="answer in answerHistory" :key="answer.round" class="review-card"><p class="review-question">0{{ answer.round }} · {{ rounds[answer.round - 1].question }}</p><div class="font-compare"><div><small>你的選擇</small><strong :style="{ fontFamily: `'${fonts.find((font) => font.name === answer.selected)?.family}', sans-serif` }">{{ answer.selected }}</strong><p>{{ fonts.find((font) => font.name === answer.selected)?.clue }}</p></div><div><small>情境標準答案</small><strong :style="{ fontFamily: `'${currentFont(answer.correct).family}', sans-serif` }">{{ answer.correct }}</strong><p>{{ currentFont(answer.correct).clue }}</p></div></div><p class="review-verdict" :class="answer.selected === answer.correct ? 'is-correct' : 'is-wrong'">{{ answer.selected === answer.correct ? '✓ 這個情境判斷很準。' : `→ ${answer.correct} 更符合這個情境，因為它${currentFont(answer.correct).use}。` }}</p></article></div><button class="restart-button" @click="restart">再玩一次 <span>↗</span></button></section>
