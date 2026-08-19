@@ -11,3 +11,25 @@ nav { height: 92px; display: grid; grid-template-columns: 1fr auto 1fr; align-it
 footer { display: flex; justify-content: space-between; padding: 22px 0 28px; border-top: 1px solid #d8d5cc; color: #92948c; font-size: .59rem; } footer i { color: #db6b43; font-style: normal; margin-left: 4px; }
 @media (max-width: 650px) { main { padding: 0 22px; } nav { height: 76px; grid-template-columns: 1fr auto; }.nav-meta { display: none; }.game-shell { padding: 54px 0 62px; }.game-heading { align-items: start; }.streak { padding-top: 12px; }.progress-track { margin-top: 38px; }.sample-card { min-height: 300px; padding: 20px; box-shadow: 8px 9px 0 #e4ded2; }.font-sample { font-size: clamp(2.55rem, 13vw, 4.5rem); }.choices { grid-template-columns: 1fr; }.choices-heading { margin-top: 44px; }.answer-row { align-items: flex-start; flex-direction: column; }.next-button { width: 100%; }.finish-shell { padding: 80px 0; } footer { display: block; line-height: 2; } footer span { display: block; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: .01ms !important; } }
+
+.choice.chosen { border-color: #db6b43; background: #fff1e9; }
+.choice.chosen .choice-result { color: #db6b43; }
+.answer-pending { color: #6e776d; }
+.review-list { display: grid; gap: 12px; margin-bottom: 24px; }
+.review-card { padding: 20px; background: #faf8f3; border: 1px solid #d8d5cc; }
+.review-question { margin: 0 0 18px; color: #db6b43; font: .64rem 'DM Mono', monospace; letter-spacing: .04em; }
+.font-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.font-compare > div { min-width: 0; padding: 14px; background: #f2eee5; }
+.font-compare > div:last-child { background: #e7f0e5; }
+.font-compare small { display: block; margin-bottom: 12px; color: #858a81; font: .6rem 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .08em; }
+.font-compare strong { display: block; color: #25382c; font-size: 1.35rem; line-height: 1.05; }
+.font-compare p { margin: 15px 0 0; color: #6e776d; font-size: .76rem; line-height: 1.55; }
+.review-verdict { margin: 15px 0 0; color: #bd6548; font-size: .82rem; line-height: 1.5; }
+.review-verdict.is-correct { color: #3e7655; }
+@media (max-width: 650px) { .font-compare { grid-template-columns: 1fr; gap: 10px; } }
+.choice { min-height: 112px; }
+.choice-copy i { color: #6e776d; font: .72rem/1.4 'Manrope', sans-serif; font-style: normal; }
+.choice.correct { border-color: #6f9d79; background: #e7f0e5; }
+.choice.correct .choice-result { color: #3e7655; }
+.choice.wrong { border-color: #d99d89; background: #f8e9e2; }
+.choice.wrong .choice-result { color: #c36242; }
